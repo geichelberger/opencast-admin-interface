@@ -4,8 +4,8 @@ import axios from 'axios';
 import {
 	getURLParams,
 	prepareAccessPolicyRulesForPost,
-	prepareSeriesExtendedMetadataFieldsForPost,
-	prepareSeriesMetadataFieldsForPost,
+	prepareMetadataFieldsForPost,
+	prepareExtendedMetadataFieldsForPost,
 	transformMetadataCollection,
 } from "../utils/resourceUtils";
 import {
@@ -192,11 +192,11 @@ export const postNewSeries = createAppAsyncThunk('series/postNewSeries', async (
 	const { values, metadataInfo, extendedMetadata } = params
 
 	// prepare metadata provided by user
-	let metadataFields = prepareSeriesMetadataFieldsForPost(
+	let metadataFields = prepareMetadataFieldsForPost(
 		metadataInfo.fields,
 		values
 	);
-	let extendedMetadataFields = prepareSeriesExtendedMetadataFieldsForPost(
+	let extendedMetadataFields = prepareExtendedMetadataFieldsForPost(
 		extendedMetadata,
 		values
 	);
