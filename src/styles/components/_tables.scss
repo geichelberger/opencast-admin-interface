@@ -205,8 +205,19 @@
             }
         }
 
-        &.sortable:hover div.chevron-pair {
+        &.sortable:hover div.chevron-pair,
+        &.sortable:focus-within div.chevron-pair {
             visibility: visible;
+        }
+
+        &.sortable span[role="button"] {
+            outline: none;
+        }
+
+        &.sortable:focus-within {
+            outline-style: auto;
+            outline-color: -webkit-focus-ring-color;
+            outline-offset: -2px;
         }
     }
 

@@ -235,6 +235,13 @@ const TableHeadRows = ({ forceDeselectAll }: { forceDeselectAll: () => unknown }
 		dispatch(updatePages());
 	};
 
+	const handleSortKeyDown = (event: React.KeyboardEvent, colName: string) => {
+		if (event.key === "Enter" || event.key === " ") {
+			event.preventDefault();
+			sortByColumn(colName);
+		}
+	};
+
 	return (
 		<>
 			{columns.map((column, key) =>
@@ -245,9 +252,22 @@ const TableHeadRows = ({ forceDeselectAll }: { forceDeselectAll: () => unknown }
 							"col-sort": reverse !== "NONE" && !!sortBy && column.name === sortBy,
 							sortable: true,
 						})}
-						onClick={() => sortByColumn(column.name)}
+						aria-sort={
+							column.name === sortBy
+								? reverse === "ASC"
+									? "ascending"
+									: reverse === "DESC"
+										? "descending"
+										: "none"
+								: "none"
+						}
 					>
-						<span>
+						<span
+							role="button"
+							tabIndex={0}
+							onClick={() => sortByColumn(column.name)}
+							onKeyDown={event => handleSortKeyDown(event, column.name)}
+						>
 							<span>{t(column.label)}</span>
 							<div className={cn({ "chevron-pair": !(column.name === sortBy && reverse !== "NONE") })}>
 								{!(column.name === sortBy && reverse === "DESC") && (
