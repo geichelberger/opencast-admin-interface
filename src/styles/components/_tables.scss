@@ -191,6 +191,8 @@
                 }
 
                 &.chevron-pair {
+                    visibility: hidden;
+
                     .chevron-up{
                         position: relative;
                         top: 3px;
@@ -201,6 +203,10 @@
                     }
                 }
             }
+        }
+
+        &.sortable:hover div.chevron-pair {
+            visibility: visible;
         }
     }
 
